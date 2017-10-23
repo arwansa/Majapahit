@@ -1,0 +1,31 @@
+{
+    "name": "Majapahit",
+    "version": "1.0.0",
+    "description": "Social Media Starter Kit",
+    "main": "app.js",
+    "author": "Arwan Salafudin Ashari <arwansalafudina@gmail.com>",
+    "engines": {
+        "node": "8.6.0"
+    },
+    "scripts": {
+        "start": "node app.js",
+        "test": "mocha 'test/test.js' --timeout 15000"
+    },
+    "dependencies": {
+        "firebase-admin": "^5.4.2",
+        "imagemagick": "^0.1.2",
+        "mongoose": "^4.12.3",
+        "morgan": "^1.6.1",
+        "request": "^2.60.0",
+        "restify": "^4.0.0",
+        "twitter-text": "^1.13.0",
+        "validator": "^5.2.0"
+    },
+    "devDependencies": {
+        "mocha": "^2.2.5",
+        "should": "^7.0.2",
+        "supertest": "^1.0.1",
+        "chai": "^3.0.0",
+        "chai-http": "^2.0.0"
+    }
+}
