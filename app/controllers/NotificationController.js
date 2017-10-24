@@ -1,6 +1,5 @@
 const twitter = require('twitter-text');
 const request = require('request');
-const validator = require('validator');
 const User = require('../models/User');
 const Notification = require('../models/Notification');
 const config = require('../config');
@@ -281,19 +280,9 @@ const NotificationController = {
     },
 
     readAll: function(req, res, next) {
-        let query = {
+        const query = formatter.pagination({
             receivers: req.authUser._id
-        };
-
-        if (validator.isMongoId(req.query.last_id + '')) {
-            query = {
-                $and: [{
-                    _id: {
-                        $lt: req.query.last_id
-                    }
-                }, query]
-            };
-        }
+        }, req.query.last_id, false);
 
         Notification.find(query)
             .populate('sender', 'username avatar')

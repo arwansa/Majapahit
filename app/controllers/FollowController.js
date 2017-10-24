@@ -168,19 +168,9 @@ const FollowController = {
             return next(false);
         }
 
-        let query = {
+        const query = formatter.pagination({
             following: req.params.id
-        };
-
-        if (validator.isMongoId(req.query.last_id + '')) {
-            query = {
-                $and: [{
-                    _id: {
-                        $gt: req.query.last_id
-                    }
-                }, query]
-            };
-        }
+        }, req.query.last_id, true);
 
         Follow.find(query)
             .select('_id follower')
@@ -213,19 +203,9 @@ const FollowController = {
             return next(false);
         }
 
-        let query = {
+        const query = formatter.pagination({
             follower: req.params.id
-        };
-
-        if (validator.isMongoId(req.query.last_id + '')) {
-            query = {
-                $and: [{
-                    _id: {
-                        $gt: req.query.last_id
-                    }
-                }, query]
-            };
-        }
+        }, req.query.last_id, true);
 
         Follow.find(query)
             .select('_id following')
