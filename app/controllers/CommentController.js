@@ -71,19 +71,9 @@ const CommentController = {
             return next(false);
         }
 
-        let query = {
+        const query = formatter.pagination({
             post: req.params.pid
-        };
-
-        if (validator.isMongoId(req.query.last_id + '')) {
-            query = {
-                $and: [{
-                    _id: {
-                        $gt: req.query.last_id
-                    }
-                }, query]
-            };
-        }
+        }, req.query.last_id, true);
 
         Comment.find(query)
             .populate('user', 'username avatar')

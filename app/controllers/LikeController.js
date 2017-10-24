@@ -179,21 +179,11 @@ const LikeController = {
 
             const followings = user.followings;
 
-            let query = {
+            const query = formatter.pagination({
                 user: {
                     $in: followings
                 }
-            };
-
-            if (validator.isMongoId(req.query.last_id + '')) {
-                query = {
-                    $and: [{
-                        _id: {
-                            $lt: req.query.last_id
-                        }
-                    }, query]
-                };
-            }
+            }, req.query.last_id, false);
 
             Like.find(query)
                 .populate('user', 'username avatar')
@@ -246,21 +236,11 @@ const LikeController = {
 
             const posts = user.posts;
 
-            let query = {
+            const query = formatter.pagination({
                 post: {
                     $in: posts
                 }
-            };
-
-            if (validator.isMongoId(req.query.last_id + '')) {
-                query = {
-                    $and: [{
-                        _id: {
-                            $lt: req.query.last_id
-                        }
-                    }, query]
-                };
-            }
+            }, req.query.last_id, false);
 
             Like.find(query)
                 .populate('user', 'username avatar')

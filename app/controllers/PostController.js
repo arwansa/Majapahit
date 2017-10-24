@@ -58,21 +58,11 @@ const PostController = {
             let feed = user.followings;
             feed.push(user._id);
 
-            let query = {
+            const query = formatter.pagination({
                 user: {
                     $in: feed
                 }
-            };
-
-            if (validator.isMongoId(req.query.last_id + '')) {
-                query = {
-                    $and: [{
-                        _id: {
-                            $lt: req.query.last_id
-                        }
-                    }, query]
-                };
-            }
+            }, req.query.last_id, false);
 
             Post.find(query)
                 .populate('user', 'username avatar')
@@ -105,19 +95,9 @@ const PostController = {
             return next(false);
         }
 
-        let query = {
+        const query = formatter.pagination({
             user: req.params.id
-        };
-
-        if (validator.isMongoId(req.query.last_id + '')) {
-            query = {
-                $and: [{
-                    _id: {
-                        $lt: req.query.last_id
-                    }
-                }, query]
-            };
-        }
+        }, req.query.last_id, false);
 
         Post.find(query)
             .populate('user', 'username avatar')
@@ -187,23 +167,13 @@ const PostController = {
 
         const hashtag = req.query.hashtag.toLowerCase();
 
-        let query = {
+        const query = formatter.pagination({
             hashtags: {
                 $elemMatch: {
                     $in: [hashtag]
                 }
             }
-        };
-
-        if (validator.isMongoId(req.query.last_id + '')) {
-            query = {
-                $and: [{
-                    _id: {
-                        $lt: req.query.last_id
-                    }
-                }, query]
-            };
-        }
+        }, req.query.last_id, false);
 
         Post.find(query)
             .populate('user', 'username avatar')

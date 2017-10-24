@@ -78,7 +78,7 @@ const UserController = {
             return next(false);
         }
 
-        let query = {
+        const query = formatter.pagination({
             $or: [{
                     username: {
                         $regex: new RegExp(req.query.search_key, 'i')
@@ -90,17 +90,7 @@ const UserController = {
                     }
                 }
             ]
-        };
-
-        if (validator.isMongoId(req.query.last_id + '')) {
-            query = {
-                $and: [{
-                    _id: {
-                        $gt: req.query.last_id
-                    }
-                }, query]
-            };
-        }
+        }, req.query.last_id, true);
 
         User.find(query)
             .select('_id avatar username name')
