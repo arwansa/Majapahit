@@ -65,7 +65,7 @@ const CommentController = {
         });
     },
 
-    readAll: function(req, res, next) {
+    readComments: function(req, res, next) {
         if (!req.params.pid || !validator.isMongoId(req.params.pid + '')) {
             res.send(400, formatter.error(null, 'invalid id'));
             return next(false);

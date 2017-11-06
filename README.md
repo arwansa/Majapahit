@@ -37,6 +37,7 @@
 ### Like
 
 - Like or unlike post
+- Read post likes
 
 ### Activity
 

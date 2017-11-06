@@ -279,7 +279,7 @@ const NotificationController = {
         next();
     },
 
-    readAll: function(req, res, next) {
+    readNotifications: function(req, res, next) {
         const query = formatter.pagination({
             receivers: req.authUser._id
         }, req.query.last_id, false);

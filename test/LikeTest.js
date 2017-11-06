@@ -65,6 +65,20 @@ const LikeTest = {
             });
     },
 
+    readLikes: function (done) {
+        chai.request(config.server)
+            .get('/posts/' + postId + '/likes')
+            .set('x-access-token', config.firebaseToken)
+            .end(function(err, res) {
+                res.should.have.status(200);
+                res.should.be.json;
+                res.body.should.be.a('object');
+                res.body.should.have.property('success');
+                res.body.success.should.equal(true);
+                done();
+            });
+    },
+
     activity: function(done) {
         chai.request(config.server)
             .get('/activity')

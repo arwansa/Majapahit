@@ -32,7 +32,7 @@ const route = function(server) {
     server.del('/posts/:id', Authentication, PostController.delete, LikeController.deletePost, CommentController.deletePost, NotificationController.deletePost, MediaController.deleteFile);
 
     server.post('/posts/:pid/comments', Authentication, UserController.mustSetUsername, CommentController.create, NotificationController.commentInMyPost, NotificationController.mentionInComment);
-    server.get('/posts/:pid/comments', Authentication, CommentController.readAll);
+    server.get('/posts/:pid/comments', Authentication, CommentController.readComments);
     server.put('/posts/:pid/comments/:id', Authentication, CommentController.update, NotificationController.commentInMyPost, NotificationController.mentionInComment);
     server.del('/posts/:pid/comments/:id', Authentication, CommentController.delete, NotificationController.deleteComment);
 
@@ -41,13 +41,14 @@ const route = function(server) {
 
     server.post('/posts/:pid/like', Authentication, UserController.mustSetUsername, LikeController.like, NotificationController.like);
     server.post('/posts/:pid/unlike', Authentication, LikeController.unlike, NotificationController.unlike);
+    server.get('/posts/:pid/likes', Authentication, LikeController.readLikes);
 
     server.post('/users/:id/follow', Authentication, UserController.mustSetUsername, FollowController.follow, NotificationController.follow);
     server.post('/users/:id/unfollow', Authentication, FollowController.unfollow, NotificationController.unfollow);
     server.get('/users/:id/followers', Authentication, FollowController.readFollowers);
     server.get('/users/:id/followings', Authentication, FollowController.readFollowings);
 
-    server.get('/notifications', Authentication, NotificationController.readAll);
+    server.get('/notifications', Authentication, NotificationController.readNotifications);
 
     server.get('/media/:type/:file_name', MediaController.loadFile);
 };
