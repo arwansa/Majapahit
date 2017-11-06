@@ -134,6 +134,39 @@ const LikeController = {
         });
     },
 
+    readLikes: function(req, res, next) {
+        if (!req.params.pid || !validator.isMongoId(req.params.pid + '')) {
+            res.send(400, formatter.error(null, 'invalid id'));
+            return next(false);
+        }
+
+        const query = formatter.pagination({
+            post: req.params.pid
+        }, req.query.last_id, true);
+
+        Like.find(query)
+            .populate('user', 'username avatar')
+            .limit(10)
+            .sort({
+                date: 1
+            })
+            .exec(function(err, likes) {
+                if (err) {
+                    console.log(err);
+                    res.send(500, formatter.error(null, "can't find likes"));
+                    return next(false);
+                }
+
+                if (likes.length == 0) {
+                    res.send(404, formatter.error(null, 'likes not found'));
+                    return next(false);
+                }
+
+                res.send(formatter.success(likes, 'get likes successfully'));
+                next();
+            });
+    },
+
     deletePost: function(req, res, next) {
         Like.remove({
             post: req.post._id

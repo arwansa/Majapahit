@@ -55,6 +55,7 @@ describe('LIKE', function() {
     it('should like post from other user /posts/:pid/like POST', LikeTest.likeFromOtherUser);
     it('should read activity /activity GET', LikeTest.activity);
     it('should read my activity /activity/you GET', LikeTest.activityYou);
+    it('should read likes /posts/:pid/likes GET', LikeTest.readLikes);
     it('should unlike post /posts/:pid/unlike POST', LikeTest.unlike);
 });
 
