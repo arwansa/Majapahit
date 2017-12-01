@@ -73,7 +73,9 @@ Before running the Majapahit, ensure you have node + npm installed and run: `$ n
 
 - Change `firebaseDatabase: 'https://[YOUR PROJECT ID].firebaseio.com/'` in /app/config.js
 
-- Change `var firebaseServiceAccount = require('[PATH/TO/serviceAccountKey.json]')` in /app/controllers/UserController.js
+- Change `portConfig: '[YOUR_PORT_HERE]'` in /app/config.js
+
+- Change `firebaseAdmin: '[FULLPATH/TO/Your Firebase Admin SDK File]'` in /app/config.js
 
 ### Config For Test
 
