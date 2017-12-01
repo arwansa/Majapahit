@@ -4,7 +4,7 @@ const firebaseAdmin = require("firebase-admin");
 const User = require('../models/User');
 const config = require('../config');
 const formatter = require('../utilities/Formatter');
-const firebaseServiceAccount = require('[PATH/TO/serviceAccountKey.json]');
+const firebaseServiceAccount = require(config.firebaseAdmin);
 
 firebaseAdmin.initializeApp({
     credential: firebaseAdmin.credential.cert(firebaseServiceAccount),
