@@ -2,14 +2,7 @@ const twitter = require('twitter-text');
 const validator = require('validator');
 const firebaseAdmin = require("firebase-admin");
 const User = require('../models/User');
-const config = require('../config');
 const formatter = require('../utilities/Formatter');
-const firebaseServiceAccount = require(config.firebaseAdmin);
-
-firebaseAdmin.initializeApp({
-    credential: firebaseAdmin.credential.cert(firebaseServiceAccount),
-    databaseURL: config.firebaseDatabase
-});
 
 const UserController = {
     auth: function(req, res, next) {

@@ -1,5 +1,4 @@
 const config = require('./config');
-const fs = require('fs');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const should = chai.should();
@@ -7,7 +6,7 @@ chai.use(chaiHttp);
 
 const NotificationTest = {
     readNotifications: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .get('/notifications')
             .set('x-access-token', config.firebaseToken)
             .end(function(err, res) {

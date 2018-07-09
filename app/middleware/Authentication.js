@@ -1,5 +1,4 @@
 const firebaseAdmin = require("firebase-admin");
-const config = require('../config');
 const User = require('../models/User');
 const formatter = require('../utilities/Formatter');
 
