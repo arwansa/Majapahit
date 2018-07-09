@@ -10,7 +10,7 @@ let commentId = '';
 
 const CommentTest = {
     createComment: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .post('/posts/image')
             .set('x-access-token', config.firebaseToken)
             .field('caption', '@secondUSER ac tincidunt vitae semper quis #comment')
@@ -24,7 +24,7 @@ const CommentTest = {
 
                 postId = res.body.data[0]._id;
 
-                chai.request(config.server)
+                chai.request(config.host)
                     .post('/posts/' + postId + '/comments')
                     .set('x-access-token', config.firebaseTokenSecondUser)
                     .send({
@@ -43,7 +43,7 @@ const CommentTest = {
     },
 
     readComments: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .get('/posts/' + postId + '/comments')
             .set('x-access-token', config.firebaseToken)
             .end(function(err, res) {
@@ -57,7 +57,7 @@ const CommentTest = {
     },
 
     updateCommentUnauthorized: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .put('/posts/' + postId + '/comments/' + commentId)
             .set('x-access-token', config.firebaseToken)
             .send({
@@ -74,7 +74,7 @@ const CommentTest = {
     },
 
     updateComment: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .put('/posts/' + postId + '/comments/' + commentId)
             .set('x-access-token', config.firebaseTokenSecondUser)
             .send({
@@ -91,7 +91,7 @@ const CommentTest = {
     },
 
     deleteCommentUnauthorized: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .delete('/posts/' + postId + '/comments/' + commentId)
             .set('x-access-token', config.firebaseToken)
             .end(function(err, res) {
@@ -105,7 +105,7 @@ const CommentTest = {
     },
 
     deleteComment: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .delete('/posts/' + postId + '/comments/' + commentId)
             .set('x-access-token', config.firebaseTokenSecondUser)
             .end(function(err, res) {

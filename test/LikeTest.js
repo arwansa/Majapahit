@@ -9,7 +9,7 @@ let postId = '';
 
 const LikeTest = {
     like: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .post('/posts/image')
             .set('x-access-token', config.firebaseToken)
             .field('caption', '@SecondUser @firstuser ac tincidunt vitae semper quis #BLUES #music')
@@ -23,7 +23,7 @@ const LikeTest = {
 
                 postId = res.body.data[0]._id;
 
-                chai.request(config.server)
+                chai.request(config.host)
                     .post('/posts/' + postId + '/like')
                     .set('x-access-token', config.firebaseToken)
                     .end(function(err, res) {
@@ -38,7 +38,7 @@ const LikeTest = {
     },
 
     likeFromOtherUser: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .post('/posts/' + postId + '/like')
             .set('x-access-token', config.firebaseTokenSecondUser)
             .end(function(err, res) {
@@ -52,7 +52,7 @@ const LikeTest = {
     },
 
     unlike: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .post('/posts/' + postId + '/unlike')
             .set('x-access-token', config.firebaseToken)
             .end(function(err, res) {
@@ -66,7 +66,7 @@ const LikeTest = {
     },
 
     readLikes: function (done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .get('/posts/' + postId + '/likes')
             .set('x-access-token', config.firebaseToken)
             .end(function(err, res) {
@@ -80,7 +80,7 @@ const LikeTest = {
     },
 
     activity: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .get('/activity')
             .set('x-access-token', config.firebaseToken)
             .end(function(err, res) {
@@ -94,7 +94,7 @@ const LikeTest = {
     },
 
     activityYou: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .get('/activity/you')
             .set('x-access-token', config.firebaseToken)
             .end(function(err, res) {

@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 
 const UserTest = {
     authFailed: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .post('/auth')
             .send({
                 token: 'asdasd',
@@ -24,7 +24,7 @@ const UserTest = {
     },
 
     authRegister: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .post('/auth')
             .send({
                 token: config.firebaseToken,
@@ -42,7 +42,7 @@ const UserTest = {
     },
 
     authRegisterSecondUser: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .post('/auth')
             .send({
                 token: config.firebaseTokenSecondUser,
@@ -60,7 +60,7 @@ const UserTest = {
     },
 
     authLogin: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .post('/auth')
             .send({
                 token: config.firebaseToken,
@@ -78,7 +78,7 @@ const UserTest = {
     },
 
     updateUsername: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .put('/users/username')
             .set('x-access-token', config.firebaseToken)
             .send({
@@ -95,7 +95,7 @@ const UserTest = {
     },
 
     updateUsernameSecondUser: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .put('/users/username')
             .set('x-access-token', config.firebaseTokenSecondUser)
             .send({
@@ -112,7 +112,7 @@ const UserTest = {
     },
 
     updateUsernameFailed: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .put('/users/username')
             .set('x-access-token', config.firebaseToken)
             .send({
@@ -130,7 +130,7 @@ const UserTest = {
     },
 
     updateName: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .put('/users/name')
             .set('x-access-token', config.firebaseToken)
             .send({
@@ -147,7 +147,7 @@ const UserTest = {
     },
 
     updateBio: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .put('/users/bio')
             .set('x-access-token', config.firebaseToken)
             .send({
@@ -164,7 +164,7 @@ const UserTest = {
     },
 
     updateAvatar: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .put('/users/avatar')
             .set('x-access-token', config.firebaseToken)
             .attach('avatar', fs.readFileSync(__dirname + '/files/Screenshot.png'), 'Screenshot.png')
@@ -179,7 +179,7 @@ const UserTest = {
     },
 
     readByUsername: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .get('/users/firstUser')
             .set('x-access-token', config.firebaseToken)
             .end(function(err, res) {
@@ -193,7 +193,7 @@ const UserTest = {
     },
 
     usernameAvailable: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .post('/users/username/check')
             .set('x-access-token', config.firebaseToken)
             .send({
@@ -210,7 +210,7 @@ const UserTest = {
     },
 
     searchUser: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .get('/users')
             .query({
                 search_key: 'FirstUser'
@@ -227,7 +227,7 @@ const UserTest = {
     },
 
     logout: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .post('/logout')
             .set('x-access-token', config.firebaseToken)
             .end(function(err, res) {
@@ -241,7 +241,7 @@ const UserTest = {
     },
 
     deleteUser: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .delete('/users')
             .set('x-access-token', config.firebaseToken)
             .end(function(err, res) {
@@ -255,7 +255,7 @@ const UserTest = {
     },
 
     deleteSecondUser: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .delete('/users')
             .set('x-access-token', config.firebaseTokenSecondUser)
             .end(function(err, res) {

@@ -1,5 +1,4 @@
 const config = require('./config');
-const fs = require('fs');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const should = chai.should();
@@ -9,7 +8,7 @@ let userId = '';
 
 const FollowTest = {
     follow: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .get('/users/firstuser')
             .set('x-access-token', config.firebaseTokenSecondUser)
             .end(function(err, res) {
@@ -21,7 +20,7 @@ const FollowTest = {
 
                 userId = res.body.data[0]._id;
 
-                chai.request(config.server)
+                chai.request(config.host)
                     .post('/users/' + userId + '/follow')
                     .set('x-access-token', config.firebaseTokenSecondUser)
                     .end(function(err, res) {
@@ -36,7 +35,7 @@ const FollowTest = {
     },
 
     followBack: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .get('/users/seconduser')
             .set('x-access-token', config.firebaseToken)
             .end(function(err, res) {
@@ -48,7 +47,7 @@ const FollowTest = {
 
                 const userId = res.body.data[0]._id;
 
-                chai.request(config.server)
+                chai.request(config.host)
                     .post('/users/' + userId + '/follow')
                     .set('x-access-token', config.firebaseToken)
                     .end(function(err, res) {
@@ -63,7 +62,7 @@ const FollowTest = {
     },
 
     followFailed: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .post('/users/' + userId + '/follow')
             .set('x-access-token', config.firebaseToken)
             .end(function(err, res) {
@@ -77,7 +76,7 @@ const FollowTest = {
     },
 
     unfollow: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .post('/users/' + userId + '/unfollow')
             .set('x-access-token', config.firebaseTokenSecondUser)
             .end(function(err, res) {
@@ -91,7 +90,7 @@ const FollowTest = {
     },
 
     readFollowers: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .get('/users/' + userId + '/followers')
             .set('x-access-token', config.firebaseToken)
             .end(function(err, res) {
@@ -105,7 +104,7 @@ const FollowTest = {
     },
 
     readFollowings: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .get('/users/' + userId + '/followings')
             .set('x-access-token', config.firebaseTokenSecondUser)
             .end(function(err, res) {

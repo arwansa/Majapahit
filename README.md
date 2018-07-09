@@ -67,6 +67,8 @@ Before running the Majapahit, ensure you have node + npm installed and run: `$ n
 
 ### Config For App
 
+- Change `mongoose: '[YOUR MongoDB URI]'` in /app/config.js
+
 - Change `oneSignalKey: '[YOUR ONESIGNAL KEY]'` in /app/config.js
 
 - Change `oneSignalAppID: '[YOUR ONESIGNAL APP ID]'` in /app/config.js
@@ -78,6 +80,8 @@ Before running the Majapahit, ensure you have node + npm installed and run: `$ n
 - Change `firebaseAdmin: '[FULLPATH/TO/Your Firebase Admin SDK File]'` in /app/config.js
 
 ### Config For Test
+
+- Change `host: '[YOUR HOST]'` in /test/config.js
 
 - Change `firebaseToken: '[FIREBASE TOKEN FROM CLIENT]'` in /test/config.js
 
@@ -93,11 +97,11 @@ Before running the Majapahit, make sure MongoDB is running
 
 ### App
 
-`$ node app.js`
+`$ npm start`
 
 ### Test
 
-`$ npm run test`
+`$ npm test`
 
 ## Collections
 

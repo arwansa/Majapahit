@@ -1,5 +1,6 @@
 const config = require('./app/config');
 const db = require('./app/core/db');
+const firebase = require('./app/core/firebase');
 const server = require('./app/core/server');
 
 const morgan = require('morgan');

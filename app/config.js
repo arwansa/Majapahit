@@ -1,6 +1,7 @@
 const config = {
     // Mongoose MongoDB
-    mongoose: 'mongodb://localhost/majapahit',
+    // e.g: mongodb://localhost/myapp
+    mongoose: '[YOUR MongoDB URI]',
 
     // One Signal
     oneSignalKey: '[YOUR ONESIGNAL KEY]',

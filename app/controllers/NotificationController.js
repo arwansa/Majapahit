@@ -431,11 +431,7 @@ const sendPushNotification = function(device, data) {
     };
 
     request(notification, function(error, response, body) {
-        if (!body.errors) {
-            console.log(body);
-        } else {
-            console.log(body.errors);
-        }
+        console.log(body);
     });
 };
 

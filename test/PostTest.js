@@ -9,7 +9,7 @@ let postId = "";
 
 const PostTest = {
     createImage: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .post('/posts/image')
             .set('x-access-token', config.firebaseToken)
             .field('caption', 'ac tincidunt vitae semper quis @SecondUser #Image')
@@ -25,7 +25,7 @@ const PostTest = {
     },
 
     createVideo: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .post('/posts/video')
             .set('x-access-token', config.firebaseTokenSecondUser)
             .field('caption', '@seconduser ac tincidunt vitae semper quis #video')
@@ -42,7 +42,7 @@ const PostTest = {
     },
 
     readFeed: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .get('/posts/feed')
             .set('x-access-token', config.firebaseToken)
             .end(function(err, res) {
@@ -56,7 +56,7 @@ const PostTest = {
     },
 
     readUser: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .get('/users/firstuser')
             .set('x-access-token', config.firebaseToken)
             .end(function(err, res) {
@@ -66,7 +66,7 @@ const PostTest = {
                 res.body.should.have.property('success');
                 res.body.success.should.equal(true);
 
-                chai.request(config.server)
+                chai.request(config.host)
                     .get('/users/' + res.body.data[0]._id + '/posts')
                     .set('x-access-token', config.firebaseToken)
                     .end(function(err, res) {
@@ -81,7 +81,7 @@ const PostTest = {
     },
 
     searchByHashtag: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .get('/posts')
             .query({
                 hashtag: 'IMAGE'
@@ -98,7 +98,7 @@ const PostTest = {
     },
 
     readPost: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .get('/posts/' + postId)
             .set('x-access-token', config.firebaseToken)
             .end(function(err, res) {
@@ -112,7 +112,7 @@ const PostTest = {
     },
 
     updateCaption: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .put('/posts/' + postId)
             .set('x-access-token', config.firebaseTokenSecondUser)
             .send({
@@ -129,7 +129,7 @@ const PostTest = {
     },
 
     deletePost: function(done) {
-        chai.request(config.server)
+        chai.request(config.host)
             .delete('/posts/' + postId)
             .set('x-access-token', config.firebaseTokenSecondUser)
             .end(function(err, res) {
